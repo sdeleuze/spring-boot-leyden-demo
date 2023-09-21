@@ -3,12 +3,12 @@ set -ex
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y --no-install-recommends tzdata ca-certificates git curl build-essential libfreetype6-dev libfontconfig-dev libcups2-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev libasound2-dev libffi-dev autoconf file unzip zip
+apt-get install -y --no-install-recommends tzdata ca-certificates git curl build-essential libfreetype6-dev libfontconfig-dev libcups2-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev libasound2-dev libffi-dev autoconf file unzip zip nano
 
 export ARCH=$(uname -m)
 case $ARCH in
     aarch64)   export BOOT_JDK_URL="https://download.bell-sw.com/java/20.0.2+10/bellsoft-jdk20.0.2+10-linux-aarch64.tar.gz" ;;
-    *)       export BOOT_JDK_URL= "https://download.bell-sw.com/java/20.0.2+10/bellsoft-jdk20.0.2+10-linux-amd64.tar.gz" ;;
+    *)       export BOOT_JDK_URL="https://download.bell-sw.com/java/20.0.2+10/bellsoft-jdk20.0.2+10-linux-amd64.tar.gz" ;;
 esac
 mkdir -p /opt/boot-jdk
 cd /opt/boot-jdk
@@ -16,12 +16,8 @@ curl -L ${BOOT_JDK_URL} | tar zx --strip-components=1
 test -f /opt/boot-jdk/bin/java
 test -f /opt/boot-jdk/bin/javac
 
-mkdir -p /opt/maven
-cd /opt/maven
-curl -L https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz | tar zx --strip-components=1
-
 cd /opt
-git clone -b premain --depth 1 https://github.com/openjdk/leyden.git
+git clone -b premain --depth 1 https://github.com/sdeleuze/leyden.git
 cd leyden
 
 bash configure --with-boot-jdk=/opt/boot-jdk
