@@ -7,8 +7,8 @@ apt-get install -y --no-install-recommends tzdata ca-certificates git curl build
 
 export ARCH=$(uname -m)
 case $ARCH in
-    aarch64)   export BOOT_JDK_URL="https://download.bell-sw.com/java/20.0.2+10/bellsoft-jdk20.0.2+10-linux-aarch64.tar.gz" ;;
-    *)       export BOOT_JDK_URL= "https://download.bell-sw.com/java/20.0.2+10/bellsoft-jdk20.0.2+10-linux-amd64.tar.gz" ;;
+    aarch64)   export BOOT_JDK_URL="https://download.bell-sw.com/java/21+37/bellsoft-jdk21+37-linux-aarch64.tar.gz" ;;
+    *)       export BOOT_JDK_URL="https://download.bell-sw.com/java/21+37/bellsoft-jdk21+37-linux-amd64.tar.gz" ;;
 esac
 mkdir -p /opt/boot-jdk
 cd /opt/boot-jdk
