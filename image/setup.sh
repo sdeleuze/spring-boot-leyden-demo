@@ -17,12 +17,10 @@ test -f /opt/boot-jdk/bin/java
 test -f /opt/boot-jdk/bin/javac
 
 cd /opt
-git clone -b premain --depth 1 https://github.com/sdeleuze/leyden.git
+git clone -b premain --depth 1 https://github.com/openjdk/leyden.git
 cd leyden
 
 bash configure --with-boot-jdk=/opt/boot-jdk
 make images
 mv /opt/leyden/build/linux-$ARCH-server-release/images/jdk /opt
 
-sed -i -e 's/\/jdk3\/official\/jdk17/\/opt\/boot-jdk/g' /opt/leyden/test/hotspot/jtreg/premain/spring-petclinic/Makefile
-sed -i -e 's/\/jdk3\/bld\/le3\/images\/jdk/\/opt\/jdk/g' /opt/leyden/test/hotspot/jtreg/premain/spring-petclinic/Makefile
