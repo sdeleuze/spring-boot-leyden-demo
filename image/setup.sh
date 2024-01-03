@@ -7,8 +7,8 @@ apt-get install -y --no-install-recommends tzdata ca-certificates git curl build
 
 export ARCH=$(uname -m)
 case $ARCH in
-    aarch64)   export BOOT_JDK_URL="https://download.bell-sw.com/java/20.0.2+10/bellsoft-jdk20.0.2+10-linux-aarch64.tar.gz" ;;
-    *)       export BOOT_JDK_URL="https://download.bell-sw.com/java/20.0.2+10/bellsoft-jdk20.0.2+10-linux-amd64.tar.gz" ;;
+    aarch64)   export BOOT_JDK_URL="https://download.bell-sw.com/java/21.0.1+12/bellsoft-jdk21.0.1+12-linux-aarch64.tar.gz" ;;
+    *)       export BOOT_JDK_URL="https://download.bell-sw.com/java/21.0.1+12/bellsoft-jdk21.0.1+12-linux-amd64.tar.gz" ;;
 esac
 mkdir -p /opt/boot-jdk
 cd /opt/boot-jdk
@@ -17,12 +17,10 @@ test -f /opt/boot-jdk/bin/java
 test -f /opt/boot-jdk/bin/javac
 
 cd /opt
-git clone -b premain --depth 1 https://github.com/sdeleuze/leyden.git
+git clone -b premain --depth 1 https://github.com/openjdk/leyden.git
 cd leyden
 
 bash configure --with-boot-jdk=/opt/boot-jdk
 make images
 mv /opt/leyden/build/linux-$ARCH-server-release/images/jdk /opt
 
-sed -i -e 's/\/jdk3\/official\/jdk17/\/opt\/boot-jdk/g' /opt/leyden/test/hotspot/jtreg/premain/spring-petclinic/Makefile
-sed -i -e 's/\/jdk3\/bld\/le3\/images\/jdk/\/opt\/jdk/g' /opt/leyden/test/hotspot/jtreg/premain/spring-petclinic/Makefile
