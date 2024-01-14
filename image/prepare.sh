@@ -12,4 +12,4 @@ git clone -b cds --depth 1 https://github.com/sdeleuze/spring-petclinic-data-jdb
 cd spring-petclinic-data-jdbc
 ./gradlew build -x test
 ./unpack-executable-jar.sh -d build/unpacked build/libs/spring-petclinic-1.0.0-SNAPSHOT.jar
-java -Dspring.context.exit=onRefresh -XX:CacheDataStore=build/unpacked/application.cds -jar build/unpacked/run-app.jar
+java -Dspring.aot.enabled=true -Dspring.context.exit=onRefresh -XX:CacheDataStore=build/unpacked/application.cds -jar build/unpacked/run-app.jar
